@@ -21,6 +21,8 @@ require "bibsonomy/api"
 # - altmetric
 #
 # Changes:
+# 2019-02-13
+# - changed how pdf's are downloaded
 # 2018-10-13
 # - added pdf_link_prefix
 # 2018-08-09 (rja)
@@ -316,7 +318,7 @@ module BibSonomy
       file_names << file_name
       # produce file path
       # file_path = dir + "/" + file_name
-      file_path = dir + "/" + intra_hash
+      file_path = dir + "/" + intra_hash + ".pdf"
       # download PDF if it not already exists
       # if not File.exists? file_path
       #   pdf, mime = bib.get_document(user_name, intra_hash, doc["fileName"])
