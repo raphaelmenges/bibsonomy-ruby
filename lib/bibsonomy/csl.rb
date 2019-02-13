@@ -309,21 +309,28 @@ module BibSonomy
         file_name = file_name[0, file_name.length - @public_doc_postfix.length] + ".pdf"
       end
       # check for possible duplicate file names
-      if file_names.include? file_name
-        warn "duplicate file name " + file_name + " for post " + intra_hash
-      end
+      # if file_names.include? file_name
+      #   warn "duplicate file name " + file_name + " for post " + intra_hash
+      # end
       # remember file name
       file_names << file_name
       # produce file path
-      file_path = dir + "/" + file_name
+      # file_path = dir + "/" + file_name
+      file_path = dir + "/" + intra_hash
       # download PDF if it not already exists
-      if not File.exists? file_path
-        pdf, mime = bib.get_document(user_name, intra_hash, doc["fileName"])
-        if pdf == nil
-          warn "could not download file " + intra_hash + "/" + user_name + "/" + file_name
-        else
-          File.binwrite(file_path, pdf)
-        end
+      # if not File.exists? file_path
+      #   pdf, mime = bib.get_document(user_name, intra_hash, doc["fileName"])
+      #   if pdf == nil
+      #     warn "could not download file " + intra_hash + "/" + user_name + "/" + file_name
+      #   else
+      #     File.binwrite(file_path, pdf)
+      #   end
+      # end
+      pdf, mime = bib.get_document(user_name, intra_hash, doc["fileName"])
+      if pdf == nil
+        warn "could not download file " + intra_hash + "/" + user_name + "/" + file_name
+      else
+        File.binwrite(file_path, pdf)
       end
       return file_path
     end
